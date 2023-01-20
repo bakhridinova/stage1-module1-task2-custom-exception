@@ -1,12 +1,18 @@
 package com.epam.mjc;
 
 
+import com.epam.mjc.exception.CouldNotFindStudentException;
+
 public class StudentManager {
 
   private static final long[] IDs = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
 
   public Student find(long studentID) {
-    return Student.getValueOf(studentID);
+    Student student = Student.getValueOf(studentID);
+    if (student == null) {
+      throw new CouldNotFindStudentException(studentID);
+    }
+    return student;
   }
 
   public static void main(String[] args) {
